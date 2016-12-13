@@ -1,7 +1,7 @@
 import pygame, sys
 from pygame.locals import *
 
-py=pygame
+pg=pygame
 
 pygame.init()
 
@@ -27,17 +27,25 @@ grey     = (211, 211, 211)
 BGCOLOR = wheat
 MAINBOXCOLOR = red
 BOXCOLOR = brown
+BRD = grey
 
 gameDisplay = pygame.display.set_mode((WindowWidth,WindowHeight))
 pygame.display.set_caption("unblock")
 
 gameExit = False
 
+a = 10
+b = 20
+
+#kui punast kastikest pole enam mänguväljal, siis see peaks olema lõpp
 while not gameExit:
     movex = None
     movey = None
 
     gameDisplay.fill(BGCOLOR)
+    pygame.draw.rect(gameDisplay, BRD, (0,0,WindowWidth, WindowHeight), 20)
+    kast = pg.draw.rect(gameDisplay, brown,[a,b,BoxWidth, BoxHeight1])
+    
     for event in pygame.event.get():
         keyinput = pg.key.get_pressed()
         if keyinput[pg.K_ESCAPE]:
