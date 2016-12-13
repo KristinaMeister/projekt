@@ -1,0 +1,55 @@
+import pygame, sys
+from pygame.locals import *
+
+pygame.init()
+
+WindowWidth = 440
+WindowHeight = 440
+
+GameArea = 400
+
+Frame = 20 #raami laius
+BoxWidth = (GameArea)/6
+BoxHeight1 = (GameArea)/2 #pikem box
+BoxHeight2 = GameArea/3
+Block = GameArea/6 #üks mängu ruuduke
+
+#            R    G    B
+brown    = (102,  51,   0)
+wheat    = (245, 222, 179)
+white    = (255, 255, 255)
+red      = (255,   0,   0)
+grey     = (211, 211, 211)
+
+
+BGCOLOR = wheat
+MAINBOXCOLOR = red
+BOXCOLOR = brown
+
+gameDisplay = pygame.display.set_mode((WindowWidth,WindowHeight))
+pygame.display.set_caption("unblock")
+
+gameExit = False
+
+while not gameExit:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            gameExit = True
+
+    gameDisplay.fill(grey)
+    #taust
+    pygame.draw.rect(gameDisplay, wheat,[Frame,Frame,GameArea,GameArea])
+
+    #pruunid boxid
+    pygame.draw.rect(gameDisplay, brown,[Frame+2*Block,Frame,BoxWidth,BoxHeight1])
+    pygame.draw.rect(gameDisplay, brown, [Frame+3*Block, Frame, BoxHeight1, BoxWidth])
+    pygame.draw.rect(gameDisplay, brown, [Frame, Frame+3*Block, BoxWidth, BoxHeight2])
+    pygame.draw.rect(gameDisplay, brown, [Frame, Frame+5*Block, BoxHeight1, BoxWidth])
+    pygame.draw.rect(gameDisplay, brown, [Frame+2*Block, Frame+3*Block, BoxHeight2, BoxWidth])
+    pygame.draw.rect(gameDisplay, brown, [Frame+4*Block, Frame+4*Block, BoxWidth, BoxHeight2])
+    pygame.draw.rect(gameDisplay, brown, [Frame+5*Block, Frame+3*Block, BoxWidth, BoxHeight1])
+
+    #punane box
+    pygame.draw.rect(gameDisplay, red, [Frame, Frame+2*Block, BoxHeight2, BoxWidth])
+
+    pygame.display.update()
