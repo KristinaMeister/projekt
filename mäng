@@ -1,6 +1,8 @@
 import pygame, sys
 from pygame.locals import *
 
+py=pygame
+
 pygame.init()
 
 WindowWidth = 440
@@ -32,24 +34,27 @@ pygame.display.set_caption("unblock")
 gameExit = False
 
 while not gameExit:
+    movex = None
+    movey = None
+
+    gameDisplay.fill(BGCOLOR)
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        keyinput = pg.key.get_pressed()
+        if keyinput[pg.K_ESCAPE]:
+            raise SystemExit
+        elif event.type == pg.QUIT:
             gameExit = True
-
-    gameDisplay.fill(grey)
-    #taust
-    pygame.draw.rect(gameDisplay, wheat,[Frame,Frame,GameArea,GameArea])
-
-    #pruunid boxid
-    pygame.draw.rect(gameDisplay, brown,[Frame+2*Block,Frame,BoxWidth,BoxHeight1])
-    pygame.draw.rect(gameDisplay, brown, [Frame+3*Block, Frame, BoxHeight1, BoxWidth])
-    pygame.draw.rect(gameDisplay, brown, [Frame, Frame+3*Block, BoxWidth, BoxHeight2])
-    pygame.draw.rect(gameDisplay, brown, [Frame, Frame+5*Block, BoxHeight1, BoxWidth])
-    pygame.draw.rect(gameDisplay, brown, [Frame+2*Block, Frame+3*Block, BoxHeight2, BoxWidth])
-    pygame.draw.rect(gameDisplay, brown, [Frame+4*Block, Frame+4*Block, BoxWidth, BoxHeight2])
-    pygame.draw.rect(gameDisplay, brown, [Frame+5*Block, Frame+3*Block, BoxWidth, BoxHeight1])
-
-    #punane box
-    pygame.draw.rect(gameDisplay, red, [Frame, Frame+2*Block, BoxHeight2, BoxWidth])
+        elif event.type == pg.MOUSEBUTTONDOWN:
+            pos = pg.mouse.get_pos()
+            spotx, spoty = event.pos[0], event.pos[1]
+        elif event.type == pg.MOUSEBUTTONUP:
+            if spotx and spoty and kast.collidepoint(pos):
+                spot2x, spot2y = event.pos[0], event.pos[1]
+                movex = (spotx - spot2x)//Block
+                movey = (spoty - spot2y)//Block
+                
+    if movex or movey:
+        a -= movex*Block
+        b -= movey*Block
 
     pygame.display.update()
