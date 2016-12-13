@@ -44,11 +44,12 @@ while not gameExit:
             raise SystemExit
         elif event.type == pg.QUIT:
             gameExit = True
+        #hiirega kastikeste liigutamine
         elif event.type == pg.MOUSEBUTTONDOWN:
             pos = pg.mouse.get_pos()
             spotx, spoty = event.pos[0], event.pos[1]
         elif event.type == pg.MOUSEBUTTONUP:
-            if spotx and spoty and kast.collidepoint(pos):
+            if spotx and spoty and kast.collidepoint(pos): #kui on vare vajutatud hiirega ja vajutatud kasti peale, mitte taustale, siis alles antakse liigutatakse kastikest 
                 spot2x, spot2y = event.pos[0], event.pos[1]
                 movex = (spotx - spot2x)//Block
                 movey = (spoty - spot2y)//Block
