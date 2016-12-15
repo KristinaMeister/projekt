@@ -31,7 +31,7 @@ clock = pg.time.Clock()
 
 def auto(x,y):
     pg.draw.rect(gameDisplay,red,(x,y,20,20))
-    #gameDisplay.blit(racecar, (x, y))
+    #gameDisplay.blit(racecar, (20, y))
 
 def obstacle(xpos, ypos, xsize, ysize):
     pg.draw.rect(gameDisplay,brown, (xpos,ypos,xsize,ysize))
@@ -42,7 +42,7 @@ y = 200
 xpos =(WindowWidth)
 ypos = randint(frame,WindowHeight-frame)
 xsize, ysize = 30, 30
-obspeed = 3
+obspeed = 10
 
 #gameDisplay.fill(white)
 #auto = pg.draw.rect(gameDisplay,red,(300,200,20,20))
