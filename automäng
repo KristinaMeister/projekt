@@ -4,8 +4,8 @@ from random import randint
 
 pg = pygame
 
-#policecar = pygame.image.load('policecar.png')
-#racecar = pygame.image.load('racecar.png')
+#policecar = pygame.image.load('policecar_2.png')
+#racecar = pygame.image.load('racecar _2.png')
 
 pygame.init()
 
