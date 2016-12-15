@@ -1,0 +1,69 @@
+import pygame, sys
+from pygame.locals import *
+
+pg=pygame
+
+pygame.init()
+
+WindowWidth = 440
+WindowHeight = 440
+
+GameArea = 400
+
+Frame = 20 #raami laius
+BoxWidth = (GameArea)/6
+BoxHeight1 = (GameArea)/2 #pikem box
+BoxHeight2 = GameArea/3
+Block = GameArea/6 #üks mängu ruuduke
+
+#            R    G    B
+brown    = (102,  51,   0)
+wheat    = (245, 222, 179)
+white    = (255, 255, 255)
+red      = (255,   0,   0)
+grey     = (211, 211, 211)
+
+
+BGCOLOR = wheat
+MAINBOXCOLOR = red
+BOXCOLOR = brown
+BRD = grey
+
+gameDisplay = pygame.display.set_mode((WindowWidth,WindowHeight))
+pygame.display.set_caption("unblock")
+
+gameExit = False
+
+a = 10
+b = 20
+
+#kui punast kastikest pole enam mänguväljal, siis see peaks olema lõpp
+while not gameExit:
+    movex = None
+    movey = None
+
+    gameDisplay.fill(BGCOLOR)
+    pygame.draw.rect(gameDisplay, BRD, (0,0,WindowWidth, WindowHeight), 20)
+    kast = pg.draw.rect(gameDisplay, brown,[a,b,BoxWidth, BoxHeight1])
+    
+    for event in pygame.event.get():
+        keyinput = pg.key.get_pressed()
+        if keyinput[pg.K_ESCAPE]:
+            raise SystemExit
+        elif event.type == pg.QUIT:
+            gameExit = True
+        #hiirega kastikeste liigutamine
+        elif event.type == pg.MOUSEBUTTONDOWN:
+            pos = pg.mouse.get_pos()
+            spotx, spoty = event.pos[0], event.pos[1]
+        elif event.type == pg.MOUSEBUTTONUP:
+            if spotx and spoty and kast.collidepoint(pos): #kui on vare vajutatud hiirega ja vajutatud kasti peale, mitte taustale, siis alles antakse liigutatakse kastikest 
+                spot2x, spot2y = event.pos[0], event.pos[1]
+                movex = (spotx - spot2x)//Block
+                movey = (spoty - spot2y)//Block
+                
+    if movex or movey:
+        a -= movex*Block
+        b -= movey*Block
+
+    pygame.display.update()
