@@ -7,6 +7,8 @@ pg = pygame
 #policecar = pygame.image.load('policecar_2.png')
 #racecar = pygame.image.load('racecar _2.png')
 
+font = pygame.font.SysFont("Arial", 26)
+
 pygame.init()
 
 WindowWidth = 600
@@ -64,6 +66,10 @@ while not end:
     auto(x,y)
 
     xpos -= obspeed
+    if xpos == 0:
+        punktid +=1
+    counter = font.render(str(punktid), False, (25,25,155))
+    gameDisplay.blit(counter, (300, 30))
 
     if xpos < -30:
         xpos = WindowWidth
