@@ -1,0 +1,68 @@
+import pygame
+import sys
+from random import randint
+
+pg = pygame
+
+pygame.init()
+
+WindowWidth = 600
+WindowHeight = 400
+frame = 100
+
+#            R    G    B
+brown    = (102,  51,   0)
+wheat    = (245, 222, 179)
+white    = (255, 255, 255)
+red      = (255,   0,   0)
+
+gameDisplay = pg.display.set_mode((WindowWidth, WindowHeight))
+pg.display.set_caption("mäng")
+
+end = False
+clock = pg.time.Clock()
+
+#pärast äkki klassina
+
+def auto(x,y):
+    pg.draw.rect(gameDisplay,red,(x,y,20,20))
+
+def obstacle(xpos, ypos, xsize, ysize):
+    pg.draw.rect(gameDisplay,brown, (xpos,ypos,xsize,ysize))
+
+x = 300
+y = 200
+xpos =(WindowWidth)
+ypos = randint(frame,WindowHeight-frame)
+xsize, ysize = 30, 30
+obspeed = 3
+
+#gameDisplay.fill(white)
+#auto = pg.draw.rect(gameDisplay,red,(300,200,20,20))
+
+while not end:
+    
+    
+    for event in pg.event.get():
+        if event.type == pg.QUIT:
+            pg.quit()
+            sys.exit()
+
+        if event.type == pg.KEYDOWN:
+            if event.key == pg.K_UP:
+                y -= 10
+            elif event.key == pg.K_DOWN:
+                y += 10
+    
+    gameDisplay.fill(white)
+    obstacle(xpos,ypos,xsize,ysize)
+    auto(x,y)
+
+    xpos -= obspeed
+
+    if xpos < -30:
+        xpos = WindowWidth
+        ypos = randint(frame,WindowHeight-frame)
+    
+    pg.display.update()
+    clock.tick(60)
