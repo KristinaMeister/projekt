@@ -4,6 +4,9 @@ from random import randint
 
 pg = pygame
 
+#policecar = pygame.image.load('policecar.png')
+#racecar = pygame.image.load('racecar.png')
+
 pygame.init()
 
 WindowWidth = 600
@@ -26,9 +29,11 @@ clock = pg.time.Clock()
 
 def auto(x,y):
     pg.draw.rect(gameDisplay,red,(x,y,20,20))
+    #gameDisplay.blit(racecar, (x, y))
 
 def obstacle(xpos, ypos, xsize, ysize):
     pg.draw.rect(gameDisplay,brown, (xpos,ypos,xsize,ysize))
+    #gameDisplay.blit(policecar, (xpos,ypos,xsize,ysize))
 
 x = 300
 y = 200
